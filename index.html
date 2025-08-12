@@ -1,0 +1,266 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Medeiros Móveis</title>
+  <meta name="description" content="Medeiros Móveis - móveis planejados, sofás e colchões com preço de fábrica." />
+
+  <!--
+    INSTRUÇÕES RÁPIDAS:
+    - Coloque sua logo em: /assets/logo.jpg  (ou altere o caminho no <img> do topo)
+    - Para adicionar produtos: coloque as imagens em /produtos/ e edite o bloco JSON abaixo (ou crie /produtos.json e aponte o fetch para ele).
+    - Arquivos principais: index.html (este), pasta assets (logo), pasta produtos (imagens)
+    - Depois eu compactarei tudo em um .zip pra você enviar ao provedor de hospedagem.
+  -->
+
+  <style>
+    :root{
+      --green:#0b5a2b; /* verde escuro */
+      --green-2:#0f7a3b;
+      --muted:#f6f6f6;
+      --black:#0b0b0b;
+      --max-width:1100px;
+      --radius:16px;
+      --glass: rgba(255,255,255,0.06);
+    }
+    *{box-sizing:border-box}
+    body{font-family:Inter, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial; margin:0; color:var(--black); background:linear-gradient(180deg,#fff 0%, #f8f9fa 100%)}
+    a{color:inherit; text-decoration:none}
+    .container{max-width:var(--max-width); margin:0 auto; padding:0 20px}
+
+    /* Header */
+    header{position:sticky; top:0; backdrop-filter: blur(6px); background:rgba(255,255,255,0.8); z-index:40; border-bottom:1px solid #e9ecef}
+    .topbar{display:flex; align-items:center; justify-content:space-between; height:76px}
+    .brand{display:flex; align-items:center; gap:14px}
+    .brand img{height:52px}
+    nav ul{display:flex; gap:18px; list-style:none; margin:0; padding:0}
+    nav a{padding:8px 12px; border-radius:10px; transition:all .18s}
+    nav a:hover{background:var(--glass); transform:translateY(-2px)}
+    .cta{background:var(--green); color:#fff; padding:10px 14px; border-radius:10px; box-shadow:0 6px 18px rgba(11,90,43,0.12)}
+
+    /* Hero */
+    .hero{display:grid; grid-template-columns:1fr 420px; gap:30px; align-items:center; padding:48px 0}
+    .hero .card{background:linear-gradient(180deg, rgba(11,90,43,0.07), rgba(11,90,43,0.02)); border-radius:20px; padding:36px}
+    h1{margin:0 0 10px; font-size:36px; color:var(--green-2)}
+    p.lead{margin:0 0 18px; color:#333; font-size:16px}
+    .hero .actions{display:flex; gap:12px}
+
+    /* angled section separators */
+    .angled{clip-path: polygon(0 6%, 100% 0, 100% 100%, 0 100%); background:linear-gradient(180deg,#ffffff, #fbfffb)}
+
+    /* cards */
+    .section{padding:48px 0}
+    .cards{display:grid; grid-template-columns:repeat(auto-fit,minmax(240px,1fr)); gap:20px}
+    .product{background:#fff;border-radius:14px;padding:14px;box-shadow:0 6px 18px rgba(13,13,13,0.06); transition:transform .25s, box-shadow .25s}
+    .product:hover{transform:translateY(-8px); box-shadow:0 18px 36px rgba(13,13,13,0.08)}
+    .product img{width:100%; height:180px; object-fit:cover; border-radius:10px}
+    .product h4{margin:10px 0 6px}
+    .price{font-weight:700; color:var(--green)}
+
+    /* About and advantages */
+    .about-grid{display:grid; grid-template-columns:1fr 360px; gap:28px; align-items:start}
+    .advantages{background:linear-gradient(180deg,#fff,#f8fff8); padding:18px; border-radius:12px}
+    .adv-item{display:flex; gap:12px; align-items:flex-start}
+    .adv-item strong{display:block}
+
+    /* Footer */
+    footer{padding:28px 0; border-top:1px solid #e9ecef; margin-top:24px}
+    .socials{display:flex; gap:12px}
+
+    /* Responsive */
+    @media (max-width:920px){
+      .hero{grid-template-columns:1fr;}
+      .about-grid{grid-template-columns:1fr}
+      .topbar{height:72px}
+      .brand img{height:44px}
+    }
+
+    /* small animations */
+    .fade-up{opacity:0; transform:translateY(12px); animation:fadeUp .7s forwards}
+    @keyframes fadeUp{to{opacity:1; transform:none}}
+  </style>
+</head>
+<body>
+  <header>
+    <div class="container topbar">
+      <div class="brand">
+        <!-- Certifique-se de colocar a logo em assets/logo.jpg -->
+        <img src="assets/logo.jpg" alt="Medeiros Móveis" onerror="this.style.display='none'" />
+        <div>
+          <div style="font-weight:700;color:var(--green);">Medeiros Móveis</div>
+          <small style="color:#666">A certeza de um ótimo negócio</small>
+        </div>
+      </div>
+
+      <nav>
+        <ul>
+          <li><a href="#home">Início</a></li>
+          <li><a href="#catalogo">Catálogo</a></li>
+          <li><a href="#sobre">Sobre</a></li>
+          <li><a href="#vantagens">Vantagens</a></li>
+          <li><a class="cta" href="https://wa.me/5544991020846" target="_blank">Fale no WhatsApp</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <main class="container">
+    <section id="home" class="hero fade-up">
+      <div class="card">
+        <h1>Móveis planejados, sofás e colchões com preço de fábrica</h1>
+        <p class="lead">Projetos sob medida, materiais de qualidade e preços direto da fábrica. Mais de <strong>20 anos</strong> transformando sua casa em um lar.</p>
+        <div class="actions">
+          <a class="cta" href="#catalogo">Ver catálogo</a>
+          <a href="#sobre" style="padding:10px 14px;border-radius:10px;">Nossa história</a>
+        </div>
+        <div style="margin-top:18px;color:#444; font-size:14px">Atendimento: <strong>(44) 9 91020846</strong> • AV Yolanda Loureiro de carvalho, 426 - Ubirata - PR</div>
+      </div>
+
+      <div style="border-radius:16px; overflow:hidden; box-shadow:0 18px 40px rgba(11,90,43,0.06)">
+        <!-- Imagem destaque: substitua assets/hero.jpg por imagem de móveis/sofás -->
+        <img src="assets/hero.jpg" alt="Sofás e móveis planejados" style="width:100%; height:420px; object-fit:cover; display:block;" onerror="this.style.display='none'" />
+      </div>
+    </section>
+
+    <section id="catalogo" class="section angled">
+      <div class="container">
+        <h2 style="color:var(--green);">Catálogo</h2>
+        <p class="lead">Confira nossos produtos — sofás, colchões e móveis planejados e tudo o que você precisar sobre móveis.</p>
+
+        <div id="products" class="cards" aria-live="polite">
+          <!-- Produtos serão injetados por JavaScript -->
+        </div>
+
+        <div style="margin-top:16px; font-size:13px; color:#555">Dica: ao substituir imagens, mantenha nomes simples, ex: "sofa-01.jpg".</div>
+      </div>
+    </section>
+
+    <section id="sobre" class="section">
+      <div class="container about-grid">
+        <div>
+          <h3>História da Medeiros Móveis</h3>
+          <p>Há mais de <strong>20 anos</strong>, a <strong>Medeiros Móveis</strong> vem transformando casas em lares. Fundada por <strong>Alcides dos Santos Medeiros</strong>, nossa empresa nasceu com a missão de oferecer móveis de qualidade, com design diferenciado e preços justos.</p>
+          <p>Com muito trabalho e dedicação, conquistamos a confiança de clientes de toda a região. Hoje, sob a liderança de <strong>Guilherme Medeiros</strong>, seguimos inovando e oferecendo soluções personalizadas, mantendo vivo o compromisso que sempre nos guiou: entregar o melhor para cada cliente.</p>
+          <p>Somos referência em <strong>móveis planejados</strong>, além de oferecer <strong>sofás e colchões de qualidade</strong> sempre com <strong>preço de fábrica</strong>, garantindo o melhor custo-benefício sem abrir mão da durabilidade e do conforto.</p>
+        </div>
+
+        <aside class="advantages">
+          <h4>Vantagens de comprar conosco</h4>
+          <div style="margin-top:12px; display:flex; flex-direction:column; gap:12px">
+            <div class="adv-item"><div style="width:42px;height:42px;border-radius:10px;background:var(--green);display:flex;align-items:center;justify-content:center;color:white;font-weight:700">1</div><div><strong>Preço de fábrica</strong><div style="font-size:13px;color:#444">Sem intermediários — preço mais baixo pra você.</div></div></div>
+            <div class="adv-item"><div style="width:42px;height:42px;border-radius:10px;background:#111;display:flex;align-items:center;justify-content:center;color:white;font-weight:700">Q</div><div><strong>Qualidade garantida</strong><div style="font-size:13px;color:#444">Materiais resistentes e acabamento impecável.</div></div></div>
+            <div class="adv-item"><div style="width:42px;height:42px;border-radius:10px;background:var(--green-2);display:flex;align-items:center;justify-content:center;color:white;font-weight:700">P</div><div><strong>Projetos sob medida</strong><div style="font-size:13px;color:#444">Aproveitamento total do seu espaço.</div></div></div>
+            <div class="adv-item"><div style="width:42px;height:42px;border-radius:10px;background:#555;display:flex;align-items:center;justify-content:center;color:white;font-weight:700">20</div><div><strong>Mais de 20 anos de experiência</strong><div style="font-size:13px;color:#444">Tradição, confiança e atendimento humano.</div></div></div>
+          </div>
+        </aside>
+      </div>
+    </section>
+
+    <section id="vantagens" class="section">
+      <div class="container">
+        <h3 style="color:var(--green);">Sofás e colchões - qualidade e preço de fábrica</h3>
+        <p class="lead">Oferecemos uma seleção especial de sofás e colchões: conforto, resistência e acabamento de primeira — sempre com preço direto da fábrica. Entre em contato para conhecer nossos modelos e condições.</p>
+
+        <div style="display:flex;gap:14px;flex-wrap:wrap;margin-top:18px">
+          <div style="flex:1; min-width:220px; background:#fff; padding:18px; border-radius:12px; box-shadow:0 10px 24px rgba(0,0,0,0.04)">
+            <h4>Poltronas e Sofás</h4>
+            <p style="margin:8px 0 0">Modelos diversos, estofamento premium e opções de cores e tecidos.</p>
+          </div>
+          <div style="flex:1; min-width:220px; background:#fff; padding:18px; border-radius:12px; box-shadow:0 10px 24px rgba(0,0,0,0.04)">
+            <h4>Colchões</h4>
+            <p style="margin:8px 0 0">Ortopédicos e de molas, com garantia de conforto e durabilidade.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="contato" class="section angled">
+      <div class="container">
+        <h3>Contato</h3>
+        <p class="lead">Visite nossa loja ou fale direto com a gente pelo WhatsApp.</p>
+        <div style="display:flex;gap:20px;flex-wrap:wrap">
+          <div style="flex:1; min-width:260px; background:#fff; padding:16px; border-radius:12px">
+            <strong>Endereço</strong>
+            <div>AV Yolanda Loureiro de Carvalho, 426 - Ubirata - PR</div>
+            <div style="margin-top:12px"><strong>Telefone/WhatsApp:</strong> (44) 991020846</div>
+            <div style="margin-top:12px"><strong>Redes:</strong>
+              <div class="socials" style="margin-top:8px">
+                <a href="#" aria-label="Instagram">@medeirosmov</a>
+                <a href="#" aria-label="Facebook">MedeirosMoveisS</a>
+              </div>
+            </div>
+          </div>
+
+          <div style="flex:1; min-width:340px; background:#fff; padding:12px; border-radius:12px">
+            <strong>Mapa</strong>
+            <div style="margin-top:12px; height:160px; border-radius:8px; overflow:hidden; background:#eee; display:flex;align-items:center;justify-content:center">Mapa interativo (substitua por iframe do Google Maps)</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <footer>
+    <div class="container" style="display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap">
+      <div>© <strong>Medeiros Móveis</strong> — Mais de 20 anos</div>
+      <div class="socials"><a href="#">Instagram</a> <a href="#">Facebook</a> <a href="#">WhatsApp</a></div>
+    </div>
+  </footer>
+
+  <!-- Produtos: Edite este bloco para adicionar novos produtos facilmente. -->
+  <script id="products-data" type="application/json">
+  [
+    {
+      "id": "sofa-01",
+      "title": "Sofá 2.60m retratil reclinavel",
+      "desc": "Estofado em Veludo de alto padrao, assento de molas ensacadas, 100% siliconado, madeiramento de eucalipto tratado, retratil até 1.80m, 6 estágios de inclinação no encostoS.",
+      "img": "produtos/sofa-01.jpg",
+      "price": "R$ 2.599,00"
+    },
+    {
+      "id": "colchao-01",
+      "title": "Box casal 1.38m molas ensacadas",
+      "desc": "Colchão de alto padrão de molas ensacadas,com 6 camadas de espumas com densidades progressivas, tecido anti-acaro e anti-alergico, base convencional com pés em madeira rosqueavel.",
+      "img": "produtos/colchao-01.jpg",
+      "price": "R$ 1.199,00"
+    }
+  ]
+  </script>
+
+  <script>
+    // Carrega produtos a partir do bloco JSON acima. Para adicionar: coloque a imagem em /produtos/ e adicione um objeto no array.
+    const products = JSON.parse(document.getElementById('products-data').textContent);
+    const container = document.getElementById('products');
+
+    function renderProducts(list){
+      if(!list || list.length===0){ container.innerHTML = '<div style="padding:18px;background:#fff;border-radius:12px">Nenhum produto cadastrado ainda.</div>'; return }
+      container.innerHTML = '';
+      list.forEach(p=>{
+        const el = document.createElement('article'); el.className='product fade-up';
+        el.innerHTML = `
+          <img src="${p.img}" alt="${p.title}" onerror="this.src='assets/placeholder.png'" />
+          <h4>${p.title}</h4>
+          <div style="font-size:13px;color:#666">${p.desc}</div>
+          <div style="margin-top:10px;display:flex;justify-content:space-between;align-items:center">
+            <div class="price">${p.price || ''}</div>
+            <a class="cta" href="https://wa.me/5544991020846?text=Olá!%20Tenho%20interesse%20no%20produto%20${encodeURIComponent(p.title)}" target="_blank">Quero</a>
+          </div>
+        `;
+        container.appendChild(el);
+      })
+    }
+
+    renderProducts(products);
+
+    // Smooth scrolling for internal links
+    document.querySelectorAll('a[href^="#"]').forEach(a=>{
+      a.addEventListener('click',e=>{
+        e.preventDefault(); const id=a.getAttribute('href').slice(1); const el=document.getElementById(id);
+        if(el) el.scrollIntoView({behavior:'smooth', block:'start'});
+      })
+    })
+  </script>
+</body>
+</html>
